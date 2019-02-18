@@ -4,7 +4,7 @@ session_start();
 
 <html>
     <head>
-        <title>Score database</title>
+        <title>Score sdfgsdfg</title>
     <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/include_head.php");
     ?>
