@@ -101,35 +101,35 @@ if (!isset($_GET['user'])) {
             $image = $row[6];
             if ($fc == 0) {
                 if ($i % 2 == 0) {
-                    echo `<tr style='background-color: rgb(50, 50, 50)'>
-                    <td> <a href="` . $image . `">` . $name . `</a></td>
-                    <td>` . $artist . `</td>
-                    <td>` . $speed . `</td>
-                    <td class='score'>` . $score . `</td>
-                    <td><input type='checkbox'></td></tr>`;
+                    echo "<tr style='background-color: rgb(50, 50, 50)'>
+                    <td> <a href='" . $image . "'>" . $name . "</a></td>
+                    <td>" . $artist . "</td>
+                    <td>" . $speed . "</td>
+                    <td class='score'>" . $score . "</td>
+                    <td><input type='checkbox'></td></tr>";
                 } else {
-                    echo `<tr style='background-color: rgb(36, 36, 36)'>
-                    <td> <a href="` . $image . `">` . $name . `</a></td>
-                    <td>` . $artist . `</td>
-                    <td>` . $speed . `</td>
-                    <td class='score'>` . $score . `</td>
-                    <td><input type='checkbox'></td></tr>`;
+                    echo "<tr style='background-color: rgb(36, 36, 36)'>
+                    <td> <a href='" . $image . "'>" . $name . "</a></td>
+                    <td>" . $artist . "</td>
+                    <td>" . $speed . "</td>
+                    <td class='score'>" . $score . "</td>
+                    <td><input type='checkbox'></td></tr>";
                 }
             } else {
                 if ($i % 2 == 0) {
-                    echo `<tr style='background-color: rgb(50, 50, 50)'>
-                    <td> <a href="` . $image . `">` . $name . `</a></td>
-                    <td>` . $artist . `</td>
-                    <td>` . $speed . `</td>
-                    <td class='score'>` . $score . `</td>
-                    <td><input type='checkbox' checked></td></tr>`;
+                    echo "<tr style='background-color: rgb(50, 50, 50)'>
+                    <td> <a href='" . $image . "'>" . $name . "</a></td>
+                    <td>" . $artist . "</td>
+                    <td>" . $speed . "</td>
+                    <td class='score'>" . $score . "</td>
+                    <td><input type='checkbox' checked></td></tr>";
                 } else {
-                    echo `<tr style='background-color: rgb(36, 36, 36)'>
-                    <td> <a href="` . $image . `">` . $name . `</a></td>
-                    <td>` . $artist . `</td>
-                    <td>` . $speed . `</td>
-                    <td class='score'>` . $score . `</td>
-                    <td><input type='checkbox' checked></td></tr>`;
+                    echo "<tr style='background-color: rgb(36, 36, 36)'>
+                    <td> <a href='" . $image . "'>" . $name . "</a></td>
+                    <td>" . $artist . "</td>
+                    <td>" . $speed . "</td>
+                    <td class='score'>" . $score . "</td>
+                    <td><input type='checkbox' checked></td></tr>";
                 }
             }
             $i++;
