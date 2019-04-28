@@ -99,9 +99,9 @@ if (!isset($_GET['user'])) {
             $score = $row[5];
             $fc = $row[7];
             $image = $row[6];
+            echo $image;
             if ($fc == 0) {
                 if ($i % 2 == 0) {
-                    echo $image;
                     echo "<tr style='background-color: rgb(50, 50, 50)'>
                     <td> <a href='" . $image . "'>" . $name . "</a></td>
                     <td>" . $artist . "</td>
