@@ -1,1 +1,0 @@
-[18-Feb-2019 05:21:23 America/New_York] PHP Warning:  Use of undefined constant phpinfo - assumed 'phpinfo' (this will throw an Error in a future version of PHP) in /home/julianvos/scoredb.julianvos.nl/register/index.php on line 3

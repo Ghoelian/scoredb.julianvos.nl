@@ -1,5 +1,0 @@
-[17-Feb-2019 10:14:54 America/New_York] PHP Warning:  require_once(./include_head.php): failed to open stream: No such file or directory in /home/julianvos/test.julianvos.nl/view/index.php on line 5
-[17-Feb-2019 10:14:54 America/New_York] PHP Fatal error:  require_once(): Failed opening required './include_head.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/julianvos/test.julianvos.nl/view/index.php on line 5
-[17-Feb-2019 10:21:14 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/julianvos/test.julianvos.nl/view/view.php:1) in /home/julianvos/test.julianvos.nl/view/view.php on line 14
-[17-Feb-2019 10:25:54 America/New_York] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/julianvos/test.julianvos.nl/view/view.php on line 3
-[17-Feb-2019 10:40:28 America/New_York] PHP Warning:  mysqli_stmt::bind_param(): Number of variables doesn't match number of parameters in prepared statement in /home/julianvos/test.julianvos.nl/view/view.php on line 44
