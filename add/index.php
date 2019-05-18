@@ -1,6 +1,6 @@
 <?php
-session_start();
-if ($_SESSION["loggedin"]) {
+
+if (setcookie("loggedin"]) {
 if (isset($_POST["submit"])) {
     require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
 
@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $artist = $_POST["artist"];
     $speed = $_POST["speed"];
     $score = $_POST["score"];
-    $userId = $_SESSION["id"];
+    $userId = setcookie("id"];
     
     if(isset($_POST["fc"])) {
         $fc = 1;
@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
     $path_parts = pathinfo($_FILES["image"]["name"]);
     $imageFileType = $path_parts['extension'];
     
-    $target_dir = "/images/" . $_SESSION["id"];
+    $target_dir = "/images/" . setcookie("id"];
     $target_file = $target_dir . "/" . md5(uniqid()) . ".png";
     $imageUploaded = 0;
     
@@ -110,8 +110,8 @@ if (isset($_POST["submit"])) {
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
+            if(setcookie('loggedin']) { ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -119,7 +119,7 @@ if (isset($_POST["submit"])) {
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if(setcookie('loggedin']) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php

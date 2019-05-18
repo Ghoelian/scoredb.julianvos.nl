@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <html>
     <head>
         <title>Score database</title>
@@ -24,16 +20,15 @@ session_start();
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
-            <?php 
+            if($loggedin) {
+                echo "<button type='button' disabled>Logged in as setcookie(name]</button>";
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
             <a href="/add"><button type='button'>Add</button></a>
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if($loggedin) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
@@ -46,8 +41,8 @@ session_start();
             ?>
         </div>
 <?php
-if($_SESSION["loggedin"]) {
-    echo "<p>You are logged in as " . $_SESSION["name"] . "</p><br>";
+if($loggedin) {
+    echo "<p>You are logged in as " . setcookie("name"] . "</p><br>";
     echo "<p><a href='/add'>Add an fc</a></p>";
     // echo "<p><a href='/edit'>Edit an fc</a></p>";
     echo "<p><a href='/view'>View a user's scores</a></p>";

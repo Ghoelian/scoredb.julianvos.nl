@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 echo phpinfo();
 if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
@@ -78,8 +78,8 @@ $con->close();
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
+            if(setcookie('loggedin']) { ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -87,7 +87,7 @@ $con->close();
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if(setcookie('loggedin']) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php

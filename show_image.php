@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <html>
 <head>
     <title>Show Image</title>
@@ -25,17 +21,18 @@ session_start();
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
-            <?php 
+            if ($loggedin) {
+                ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
+            <?php
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
             <a href="/add"><button type='button'>Add</button></a>
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
-            ?>
+            if ($loggedin) {
+                ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
             } else {

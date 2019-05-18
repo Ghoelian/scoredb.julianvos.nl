@@ -1,40 +1,9 @@
 <?php
+require_once('/include/loginCheck.php');
+
 if (isset($_POST['username'], $_POST['password'])) {
-    session_start();
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
-
-    $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-    if (mysqli_connect_errno()) {
-        die('Failed to connect: ' . mysqli_connect_error());
-    }
-
-    if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
-        $stmt->bind_param('s', $_POST['username']);
-        $stmt->execute();
-        $stmt->store_result();
-    
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id, $password);
-            $stmt->fetch();
-        
-            if (password_verify($_POST['password'], $password)) {
-                $_SESSION['loggedin'] = true;
-                $_SESSION['name'] = $_POST['username'];
-                $_SESSION['id'] = $id;
-                header('location: /index.php');
-            } else {
-                echo 'Incorrect username/password';
-            }
-        } else {
-            echo 'Incorrect username/password';
-        }
-        $stmt->close();
-    } else {
-        echo 'Could not prepare statement';
-    }
+    login($_POST['username'], $_POST['password']);
 }
-
-$con->close();
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +11,7 @@ $con->close();
   <head>
     <meta charset="utf-8">
     <title>Log in</title>
-     <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/include_head.php");
-    ?>
+     <?php require_once($_SERVER["DOCUMENT_ROOT"] . "/include_head.php"); ?>
     <style>
     .login-form {
       width: 300px;
@@ -91,27 +58,21 @@ $con->close();
             color: #ffffff;
             }
             </style>
-            <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
-            <?php 
-            } ?>
+            <?php if(checkLogin($_COOKIE['token'])) { ?>
+            <button type="button" disabled>Logged in as <?php echo $_COOKIE('name'); ?></button>
+            <?php } ?>
             <a href="/index.php"><button type="button">Home</button></a>
             <a href="/add"><button type='button'>Add</button></a>
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
-            <?php
-            if($_SESSION['loggedin']) {
-            ?>
+            <?php if(checkLogin($_COOKIE['token'])) { ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
-            } else {
-                ?>
+            } else { ?>
                 <a href="/login"><button type='button'>Log in</button></a>
                 <a href="/register"><button type="button">Sign up</button></a>
                 <?php
-            }
-            ?>
+            } ?>
         </div>
         
     <div class="login-form">

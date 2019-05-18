@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 if (!isset($_GET['user'])) {
     header("location: /view");
 }
@@ -27,8 +27,8 @@ if (!isset($_GET['user'])) {
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
+            if(setcookie('loggedin']) { ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -36,7 +36,7 @@ if (!isset($_GET['user'])) {
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if(setcookie('loggedin']) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php

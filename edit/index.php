@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 header("location: /index.php");
 ?>
 
@@ -25,8 +25,8 @@ header("location: /index.php");
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
+            if(setcookie('loggedin']) { ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -34,7 +34,7 @@ header("location: /index.php");
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if(setcookie('loggedin']) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
@@ -48,13 +48,13 @@ header("location: /index.php");
         </div>
 
 <?php
-if($_SESSION["loggedin"]) {
+if(setcookie("loggedin"]) {
     require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
 
     $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME) or die(mysqli_error());
     
     if($stmt = $con->prepare("SELECT * FROM `scores` WHERE `userId` = ?")) {
-        $stmt->bind_param("i", $_SESSION["id"]);
+        $stmt->bind_param("i", setcookie("id"]);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->free_result();

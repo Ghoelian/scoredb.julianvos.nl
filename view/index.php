@@ -1,12 +1,12 @@
 <?php
-session_start();
+
 ?>
 
 <html>
     <head>
         <title>View user scores</title>
         <?php
-        require_once($_SERVER['DOCUMENT_ROOT'] . "/include_head.php");
+        require_once($_SERVER['DOCUMENT_ROOT'] . "/include/include_head.php");
         ?>
     </head>
     
@@ -25,8 +25,8 @@ session_start();
             }
             </style>
             <?php
-            if($_SESSION['loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo $_SESSION['name'] ?></button>
+            if(setcookie('loggedin']) { ?>
+            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -34,7 +34,7 @@ session_start();
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if($_SESSION['loggedin']) {
+            if(setcookie('loggedin']) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
