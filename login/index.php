@@ -58,14 +58,14 @@ if (isset($_POST['username'], $_POST['password'])) {
             color: #ffffff;
             }
             </style>
-            <?php if(checkLogin($_COOKIE['token'])) { ?>
+            <?php if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) { ?>
             <button type="button" disabled>Logged in as <?php echo $_COOKIE('name'); ?></button>
             <?php } ?>
             <a href="/index.php"><button type="button">Home</button></a>
             <a href="/add"><button type='button'>Add</button></a>
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
-            <?php if(checkLogin($_COOKIE['token'])) { ?>
+            <?php if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) { ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php
             } else { ?>

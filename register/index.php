@@ -1,25 +1,9 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/include/login.php');
 
-echo phpinfo();
 if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
-
-    $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-    if (mysqli_connect_errno()) {
-        die('Failed to connect: ' . mysqli_connect_error());
-    }
-
-    if ($stmt = $con->prepare('INSERT INTO accounts (username, email, password) VALUES (?, ?, ?)')) {
-        $stmt->bind_param('sss', $_POST['username'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT));
-        $stmt->execute();
-        
-        echo "New user created";
-    } else {
-        echo 'Could not prepare statement';
-    }
+    createUser($_POST['username'], $_POST['password'], $_POST['email']);
 }
-
-$con->close();
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +12,7 @@ $con->close();
     <meta charset="utf-8">
     <title>Register</title>
     <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/include_head.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . '/include/include_head.php');
     ?>
     <style>
     .login-form {
@@ -78,8 +62,8 @@ $con->close();
             }
             </style>
             <?php
-            if(setcookie('loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
+            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) { ?>
+            <button type="button" disabled>Logged in as <?php echo get('name'); ?></button>
             <?php 
             } ?>
             <a href="/index.php"><button type="button">Home</button></a>
@@ -87,7 +71,7 @@ $con->close();
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>
             <?php
-            if(setcookie('loggedin']) {
+            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
             ?>
             <a href="/login/logout.php"><button type='button'>Log out</button></a>
             <?php

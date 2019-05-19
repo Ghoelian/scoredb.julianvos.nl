@@ -1,6 +1,7 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/include/login.php');
 
-if (setcookie("loggedin"]) {
+if (checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
 if (isset($_POST["submit"])) {
     require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
 
@@ -10,7 +11,7 @@ if (isset($_POST["submit"])) {
     $artist = $_POST["artist"];
     $speed = $_POST["speed"];
     $score = $_POST["score"];
-    $userId = setcookie("id"];
+    $userId = get('id');
     
     if(isset($_POST["fc"])) {
         $fc = 1;
@@ -21,7 +22,7 @@ if (isset($_POST["submit"])) {
     $path_parts = pathinfo($_FILES["image"]["name"]);
     $imageFileType = $path_parts['extension'];
     
-    $target_dir = "/images/" . setcookie("id"];
+    $target_dir = "/images/" . $userId;
     $target_file = $target_dir . "/" . md5(uniqid()) . ".png";
     $imageUploaded = 0;
     
@@ -96,41 +97,9 @@ if (isset($_POST["submit"])) {
     </style>
     </head>
     <body>
-        <div class='header' style='width: 100%; height: 5%; background-color: rgb(50, 50, 50)'>
-            <style>
-            button {
-            width: 19%;
-            padding: 15px;
-            background-color: #535b63;
-            border: 0;
-            box-sizing: border-box;
-            cursor: pointer;
-            font-weight: bold;
-            color: #ffffff;
-            }
-            </style>
-            <?php
-            if(setcookie('loggedin']) { ?>
-            <button type="button" disabled>Logged in as <?php echo setcookie('name'] ?></button>
-            <?php 
-            } ?>
-            <a href="/index.php"><button type="button">Home</button></a>
-            <a href="/add"><button type='button'>Add</button></a>
-            <!--<button type='button'>Edit</button>-->
-            <a href="/view"><button type='button'>View</button></a>
-            <?php
-            if(setcookie('loggedin']) {
-            ?>
-            <a href="/login/logout.php"><button type='button'>Log out</button></a>
-            <?php
-            } else {
-                ?>
-                <a href="/login"><button type='button'>Log in</button></a>
-                <a href="/register"><button type="button">Sign up</button></a>
-                <?php
-            }
-            ?>
-        </div>
+        <?php
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/include/header.php');
+        ?>
         
         <div class="login-form">
         <form action="index.php" method="post" enctype="multipart/form-data">

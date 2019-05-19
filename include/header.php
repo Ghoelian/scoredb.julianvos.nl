@@ -13,14 +13,14 @@ echo `<div class='header' style='width: 100%; height: 5%; background-color: rgb(
             }
             </style>`;
 
-            if(checkLogin($_COOKIE['token'])) {
+            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
             echo `<button type="button" disabled>Logged in as `; echo getName(); echo `</button>`;
             }
             echo `<a href="/index.php"><button type="button">Home</button></a>
             <a href="/add"><button type='button'>Add</button></a>
             <!--<button type='button'>Edit</button>-->
             <a href="/view"><button type='button'>View</button></a>`;
-            if(checkLogin($_COOKIE['token'])) {
+            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
             echo `<a href="/login/logout.php"><button type='button'>Log out</button></a>`;
             } else {
                 echo `<a href="/login"><button type='button'>Log in</button></a>
