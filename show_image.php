@@ -2,7 +2,7 @@
 <head>
     <title>Show Image</title>
     <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/include/include_head.php");
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/include/include_head.php');
     ?>
 </head>
 
@@ -10,7 +10,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/include/header.php');
 
-$image = $_GET["image"];
+$image = $_GET['image'];
 echo "<img src='" . $image . "'>";
 ?>
 </body>
