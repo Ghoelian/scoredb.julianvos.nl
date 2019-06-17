@@ -6,8 +6,8 @@ class Login
 
     public function Login()
     {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/config/Config.php');
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/include/Database.php');
+        require_once(__DIR__ . '/../config/Config.php');
+        require_once(__DIR__ . '/Database.php');
 
         $this->Database = new Database();
         $this->config = new Config();
