@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/include/login.php');
+require_once(__DIR__ . '/../include/login.php');
 
 if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     createUser($_POST['username'], $_POST['password'], $_POST['email']);
@@ -12,7 +12,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     <meta charset="utf-8">
     <title>Register</title>
     <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . '/include/include_head.php');
+    require_once(__DIR__ . '/../include/include_head.php');
     ?>
     <style>
     .login-form {

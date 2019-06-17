@@ -5,7 +5,7 @@ class Database
 
     public function Database()
     {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/config/Config.php');
+        require_once(__DIR__ . '/../config/Config.php');
         $Config = new Config();
 
         $this->con = mysqli_connect($Config->getHost(), $Config->getUser(), $Config->getPass(), $Config->getName());

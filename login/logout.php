@@ -1,5 +1,5 @@
 <?php
-require_once('/include/Login.php');
+require_once(__DIR__ . '/../include/Login.php');
 $Login = new Login();
 
 $Login->log_out();

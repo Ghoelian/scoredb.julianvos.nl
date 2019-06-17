@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/include/Login.php');
-require_once($_SERVER["DOCUMENT_ROOT"] . "/include/Head.php");
-require_once($_SERVER['DOCUMENT_ROOT'] . '/include/Header.php');
+require_once(__DIR__ . '/../include/Login.php');
+require_once(__DIR__ . '/../include/Head.php');
+require_once(__DIR__ . '/../include/Header.php');
 
 $Header = new Header();
 $Head = new Head();
