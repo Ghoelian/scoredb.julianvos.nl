@@ -61,5 +61,8 @@ class Login
 
     public function log_out()
     {
+        setcookie('token', time() - 3600);
+        setcookie('username', time() - 3600);
+        $this->Database->deleteToken();
     }
 }

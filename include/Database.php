@@ -19,6 +19,24 @@ class Database
     {
     }
 
+    public function deleteToken($username) {
+        if ($stmt = $this->con->prepare('UPDATE accounts SET token = null WHERE username = ?')) {
+            if ($stmt->bind_param('s', $username)) {
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    echo '<p>execute() failed: ' . $stmt->error . ' in ' . __FILE__ . ':' . __LINE__. '</p>';
+                    return false;
+                }
+            } else {
+                echo '<p>bind_param() failed: ' . $stmt->error . ' in ' . __FILE__ . ':' . __LINE__ . '</p>';
+                return false;
+            }
+        } else {
+            echo '<p> prepare() failed: ' . $this->con->error . ' in ' . __FILE__ . ':' . __LINE__ . '</p>';
+        }
+    }
+
     public function putToken($token, $username)
     {
         if ($stmt = $this->con->prepare('UPDATE accounts SET token = ? WHERE username = ?')) {
