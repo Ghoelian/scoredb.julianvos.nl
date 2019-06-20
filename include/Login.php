@@ -31,8 +31,8 @@ class Login
         
                 if (password_verify($password, $passwordDB)) {
                     $token = hash('sha256', uniqid('', true));
-                    setcookie('token', $token, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
-                    setcookie('username', $username, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
+                    setcookie('token', $token, time()+60*60*24*30, '/', 'localhost', false, true);
+                    setcookie('username', $username, time()+60*60*24*30, '/', 'localhost', false, true);
 
                     if ($this->Database->putToken($token, $username)) {
                         header('location: /index.php');

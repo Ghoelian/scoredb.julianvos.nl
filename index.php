@@ -23,7 +23,7 @@ $Database = new Database();
     <?php
 $Header->echoHeader();
     if ($Login->check()) {
-        echo "<p>You are logged in as " . $Database->get("name") . "</p><br>";
+        echo "<p>You are logged in as " . $_COOKIE['username'] . "</p><br>";
         echo "<p><a href='/add'>Add an fc</a></p>";
         // echo "<p><a href='/edit'>Edit an fc</a></p>";
         echo "<p><a href='/view'>View a user's scores</a></p>";

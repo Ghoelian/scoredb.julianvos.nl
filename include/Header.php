@@ -3,7 +3,8 @@ class Header
 {
     private $Login;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->Login = new Login();
     }
 
@@ -37,6 +38,9 @@ class Header
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
             if ($this->Login->check($_COOKIE['token'], $_COOKIE['username'])) {
                 echo "<a href='/login/logout.php'><button type='button'>Log out</button></a>";
+            } else {
+                echo "<a href='/login'><button type='button'>Log in</button></a>
+                    <a href='/register'><button type='button'>Sign up</button></a>";
             }
         } else {
             echo "<a href='/login'><button type='button'>Log in</button></a>
