@@ -35,7 +35,7 @@ class Header
             <!--<button type='button'>Edit</button>-->
             <a href='/view'><button type='button'>View</button></a>";
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
-            if ($this->Login->checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
+            if ($this->Login->check($_COOKIE['token'], $_COOKIE['username'])) {
                 echo "<a href='/login/logout.php'><button type='button'>Log out</button></a>";
             }
         } else {
