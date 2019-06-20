@@ -1,6 +1,12 @@
 <?php
 class Header
 {
+    private $Login;
+
+    public function __construct() {
+        $this->Login = new Login();
+    }
+
     public function echoHeader()
     {
         echo "<div class='header' style='width: 100%; height: 5%; background-color: rgb(50, 50, 50)'>
@@ -18,9 +24,9 @@ class Header
             </style>";
 
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
-            if (checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
+            if ($this->Login->check($_COOKIE['token'], $_COOKIE['username'])) {
                 echo "<button type='button' disabled>Logged in as ";
-                echo getName();
+                echo $_COOKIE['username'];
                 echo "</button>";
             }
         }
@@ -29,7 +35,7 @@ class Header
             <!--<button type='button'>Edit</button>-->
             <a href='/view'><button type='button'>View</button></a>";
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
-            if (checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
+            if ($this->Login->checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
                 echo "<a href='/login/logout.php'><button type='button'>Log out</button></a>";
             }
         } else {
