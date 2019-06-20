@@ -1,57 +1,32 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/include/login.php');
+require_once(__DIR__ . '/../include/Login.php');
+require_once(__DIR__ . '/../include/Header.php');
+require_once(__DIR__ . '/../include/Head.php');
+require_once(__DIR__ . '/../config/Config.php');
+require_once(__DIR__ . '/../include/Database.php');
 
-if (checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
-if (isset($_POST["submit"])) {
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
+$Database = new Database();
+$Head = new Head();
+$Header = new Header();
+$Login = new Login();
+$Config = new Config();
 
-    $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME) or die(mysqli_error());
-    
-    $name = $_POST["name"];
-    $artist = $_POST["artist"];
-    $speed = $_POST["speed"];
-    $score = $_POST["score"];
-    $userId = get('id');
-    
-    if(isset($_POST["fc"])) {
-        $fc = 1;
-    } else {
-        $fc = 0;
-    }
-    
-    $path_parts = pathinfo($_FILES["image"]["name"]);
-    $imageFileType = $path_parts['extension'];
-    
-    $target_dir = "/images/" . $userId;
-    $target_file = $target_dir . "/" . md5(uniqid()) . ".png";
-    $imageUploaded = 0;
-    
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $target_dir)) {
-        mkdir($_SERVER['DOCUMENT_ROOT'] . $target_dir, 0777, true);
-    }
-    
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $target_file)) {
-        if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $target_file)) {
-                if ($stmt = $con->prepare("INSERT INTO `scores` (`userId`, `name`, `artist`, `speed`, `score`, `fc`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-                $stmt->bind_param("issiiis", $userId, $name, $artist, $speed, $score, $fc, $target_file);
-                $stmt->execute();
-                $stmt->close();
-                echo "<h2>Score inserted</h2>";
-            } else {
-                echo "<h2>Prepare statement failed</h2>";
-            }
-            } else {
-                echo "<h2>File upload failed</h2>";
-            }
+if ($Login->check($_COOKIE['username'], $_COOKIE['token'])) {
+    if (isset($_POST["submit"])) {
+        $name = $_POST["name"];
+        $artist = $_POST["artist"];
+        $speed = $_POST["speed"];
+        $score = $_POST["score"];
+        $userId = $Database->getId($_COOKIE['username']);
+
+        if (isset($_POST["fc"])) {
+            $fc = 1;
         } else {
-            echo "<h2>Wrong file type</h2>";
+            $fc = 0;
         }
-    } else {
-        echo "<h2>File exists</h2>";
+
+        echo $Database->addScore($name, $artist, $speed, $score, $userId, $fc);
     }
-    $con->close();
-}
 } else {
     echo "Please log in first";
 }
@@ -61,7 +36,7 @@ if (isset($_POST["submit"])) {
     <head>
         <title>Add score</title>
         <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/include_head.php");
+    $Head->echoHead();
     ?>
         <style>
     .login-form {
@@ -98,7 +73,7 @@ if (isset($_POST["submit"])) {
     </head>
     <body>
         <?php
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/include/header.php');
+        $Header->echoHeader();
         ?>
         
         <div class="login-form">

@@ -1,8 +1,17 @@
 <?php
-require_once(__DIR__ . '/../include/login.php');
+require_once(__DIR__ . '/../include/Login.php');
+require_once(__DIR__ . '/../include/Head.php');
+require_once(__DIR__ . '/../include/Header.php');
+require_once(__DIR__ . '/../include/Database.php');
+
+
+$Header = new Header();
+$Head = new Head();
+$Login = new Login();
+$Database = new Database();
 
 if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
-    createUser($_POST['username'], $_POST['password'], $_POST['email']);
+    $Database->createUser($_POST['username'], $_POST['password'], $_POST['email']);
 }
 ?>
 
@@ -12,7 +21,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     <meta charset="utf-8">
     <title>Register</title>
     <?php
-    require_once(__DIR__ . '/../include/include_head.php');
+    $Head->echoHead();
     ?>
     <style>
     .login-form {
@@ -48,41 +57,9 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     </style>
   </head>
   <body>
-      <div class='header' style='width: 100%; height: 5%; background-color: rgb(50, 50, 50)'>
-            <style>
-            button {
-            width: 19%;
-            padding: 15px;
-            background-color: #535b63;
-            border: 0;
-            box-sizing: border-box;
-            cursor: pointer;
-            font-weight: bold;
-            color: #ffffff;
-            }
-            </style>
-            <?php
-            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) { ?>
-            <button type="button" disabled>Logged in as <?php echo get('name'); ?></button>
-            <?php 
-            } ?>
-            <a href="/index.php"><button type="button">Home</button></a>
-            <a href="/add"><button type='button'>Add</button></a>
-            <!--<button type='button'>Edit</button>-->
-            <a href="/view"><button type='button'>View</button></a>
-            <?php
-            if(checkLogin($_COOKIE['token'], $_COOKIE['username'])) {
-            ?>
-            <a href="/login/logout.php"><button type='button'>Log out</button></a>
-            <?php
-            } else {
-                ?>
-                <a href="/login"><button type='button'>Log in</button></a>
-                <a href="/register"><button type="button">Sign up</button></a>
-                <?php
-            }
-            ?>
-        </div>
+      <?php
+      $Header->echoHeader();
+      ?>
         
     <div class="login-form">
       <h1>Register</h1>
