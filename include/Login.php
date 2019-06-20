@@ -38,8 +38,8 @@ class Login
                     $token = uniqid('', true);
                     $hashToken = password_hash($token, PASSWORD_BCRYPT);
 
-                    setcookie('token', $token, time()+60*60*24*30, '/', 'localhost', false, true);
-                    setcookie('username', $username, time()+60*60*24*30, '/', 'localhost', false, true);
+                    setcookie('token', $token, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
+                    setcookie('username', $username, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
 
                     echo $username . $token;
 
