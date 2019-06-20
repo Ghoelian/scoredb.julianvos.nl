@@ -1,9 +1,9 @@
 <?php
 class Database
 {
-    var $con;
+    public $con;
 
-    public function Database()
+    public function __construct()
     {
         require_once(__DIR__ . '/../config/Config.php');
         $Config = new Config();
@@ -19,15 +19,22 @@ class Database
     {
     }
 
-    public function insert($column, $data)
+    public function putToken($token, $username)
     {
-        if ($stmt = $this->con->prepare('INSERT INTO accounts (?) VALUES (?)')) {
-            $stmt->bind_param('ss', $column, $data);
-            $stmt->execute();
-            return TRUE;
+        if ($stmt = $this->con->prepare('UPDATE accounts SET token = ? WHERE username = ?')) {
+            if ($stmt->bind_param('ss', $token, $username)) {
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    echo '<p>execute() failed: ' . $stmt->error . ' in ' . __FILE__ . ':' . __LINE__. '</p>';
+                    return false;
+                }
+            } else {
+                echo '<p>bind_param() failed: ' . $stmt->error . ' in ' . __FILE__ . ':' . __LINE__ . '</p>';
+                return false;
+            }
         } else {
-            echo 'Could not prepare statement';
-            return FALSE;
+            echo '<p> prepare() failed: ' . $this->con->error . ' in ' . __FILE__ . ':' . __LINE__ . '</p>';
         }
     }
 
@@ -43,7 +50,7 @@ class Database
         
             echo 'New user created';
         } else {
-            echo 'Could not prepare statement';
+            echo 'Could not prepare statement in ' . __FILE__ . ":" . __LINE__ . "</p><br>";
         }
     }
 }

@@ -4,7 +4,7 @@ class Login
     private $con;
     private $Database;
 
-    public function Login()
+    public function __construct()
     {
         require_once(__DIR__ . '/../config/Config.php');
         require_once(__DIR__ . '/Database.php');
@@ -34,23 +34,23 @@ class Login
                     setcookie('token', $token, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
                     setcookie('username', $username, time()+60*60*24*30, '/', 'scoredb.julianvos.nl', false, true);
 
-                    if ($this->Database->insert('token', $token)) {
+                    if ($this->Database->putToken($token, $username)) {
                         header('location: /index.php');
                     } else {
-                        echo 'Failed to put token, please try again later<br/>';
+                        echo '<p>Failed to put token in ' . __FILE__ . ":" . __LINE__ . "</p>";
                         $this->log_out();
                     }
                 } else {
-                    echo 'Incorrect username/password<br/>';
+                    echo '<p>Incorrect username/password</p>';
                     $this->log_out();
                 }
             } else {
-                echo 'Incorrect username/password<br/>';
+                echo '<p>Incorrect username/password</p>';
                 $this->log_out();
             }
             $stmt->close();
         } else {
-            echo 'Could not prepare statement<br/>';
+            echo '<p>Could not prepare statement in ' . __FILE__ . ":" . __LINE__ . "</p>";
             $this->log_out();
         }
     }
