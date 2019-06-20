@@ -1,28 +1,28 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/include/login.php');
+// require_once(__DIR__ . '/../include/Login.php');
+require_once(__DIR__ . '/../include/Header.php');
+require_once(__DIR__ . '/../include/Head.php');
+require_once(__DIR__ . '/../include/Database.php');
+
+$Head = new Head();
+// $Header = new Header();
+// $Login = new Login();
+$Database = new Database();
 ?>
 
 <html>
     <head>
         <title>View user scores</title>
         <?php
-        require_once($_SERVER['DOCUMENT_ROOT'] . "/include/include_head.php");
+        $Head->echoHead();
         ?>
     </head>
     
     <body>
         <?php
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/include/header.php');
-        require_once($_SERVER["DOCUMENT_ROOT"] . "/config/db.php");
+        // $Header->echoHeader();
 
-        $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME) or die(mysqli_error());
-        
-        if($stmt = $con->prepare("SELECT id, username FROM `accounts`")) {
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $stmt->free_result();
-            $stmt->close();
-        }
+        $result = $Database->getUsers();
         
         echo "<p>Select user:</p><table>";
         
