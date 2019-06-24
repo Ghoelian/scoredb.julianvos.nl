@@ -18,7 +18,8 @@ class Database
         }
     }
 
-    public function load() {
+    public function load()
+    {
         $this->Login = new Login();
     }
 
@@ -101,15 +102,8 @@ class Database
     public function getImages($id, $sort)
     {
         $sql = "SELECT * FROM scores WHERE userId=?";
-        
-        if ($sort == "name") {
-            $sql .= " ORDER BY name";
-        } elseif ($sort == "artist") {
-            $sql .= " ORDER BY artist";
-        } elseif ($sort == "speed") {
-            $sql .= " ORDER BY speed DESC";
-        } elseif ($sort == "score") {
-            $sql .= " ORDER BY score DESC";
+        if (isset($sort)) {
+            $sql .= " ORDER BY " . $sort;
         } else {
             $sql .= " ORDER BY artist";
         }
@@ -137,7 +131,8 @@ class Database
         return $result;
     }
 
-    public function addScore($name, $artist, $speed, $score, $userId, $fc) {
+    public function addScore($name, $artist, $speed, $score, $userId, $fc)
+    {
         $path_parts = pathinfo($_FILES["image"]["name"]);
         $imageFileType = $path_parts['extension'];
     
@@ -163,7 +158,6 @@ class Database
                         } else {
                             return "<h2>Adding score failed. Please try again later!</h2>";
                         }
-                        
                     } else {
                         return "<h2>Adding score failed. Please try again later!</h2>";
                     }

@@ -80,7 +80,7 @@ if ($Login->check($_COOKIE['username'], $_COOKIE['token'])) {
         <form action="index.php" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td>Name:</td>
+                    <td>Song:</td>
                     <td><input type="text" name="name" id="name"></td>
                 </tr>
                 <tr>
