@@ -93,15 +93,20 @@ class Database
             $stmt->bind_param('sss', $username, $email, password_hash($password, PASSWORD_BCRYPT));
             $stmt->execute();
         
-            echo 'New user created';
+            echo '<p>New user created</p>';
         } else {
-            echo 'Could not create user</p><br>';
+            echo '<p>Could not create user</p><br>';
         }
     }
 
-    public function getImages($id, $sort)
+    public function getImages($name, $sort)
     {
-        $sql = "SELECT * FROM scores WHERE userId=?";
+        $sql = "SELECT name, artist, speed, score, image, fc 
+                FROM accounts 
+                JOIN scores 
+                    on accounts.id = scores.userId 
+                WHERE accounts.username = ?";
+
         if (isset($sort)) {
             $sql .= " ORDER BY " . $sort;
         } else {
@@ -109,11 +114,13 @@ class Database
         }
         
         if ($stmt = $this->con->prepare($sql)) {
-            $stmt->bind_param("i", $id);
+            $stmt->bind_param("s", $name);
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->free_result();
             $stmt->close();
+        } else {
+            echo "<h2>Getting scores failed. Please try again later!</h2>";
         }
         
         return $result;
@@ -121,11 +128,13 @@ class Database
 
     public function getUsers()
     {
-        if ($stmt = $this->con->prepare("SELECT id, username FROM `accounts`")) {
+        if ($stmt = $this->con->prepare("SELECT username FROM `accounts`")) {
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->free_result();
             $stmt->close();
+        } else {
+            echo "<h2>Getting users failed. Please try again later!</h2>";
         }
 
         return $result;
@@ -147,7 +156,11 @@ class Database
         if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $target_file)) {
             if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $target_file)) {
-                    if ($stmt = $this->con->prepare("INSERT INTO `scores` (`userId`, `name`, `artist`, `speed`, `score`, `fc`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                    $sql = "INSERT INTO `scores`
+                    (`userId`, `name`, `artist`, `speed`, `score`, `fc`, `image`)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                    if ($stmt = $this->con->prepare($sql)) {
                         if ($stmt->bind_param("issiiis", $userId, $name, $artist, $speed, $score, $fc, $target_file)) {
                             if ($stmt->execute()) {
                                 $stmt->close();
