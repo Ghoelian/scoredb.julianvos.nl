@@ -39,8 +39,8 @@ class Login
                     $token = uniqid('', true);
                     $hashToken = password_hash($token, PASSWORD_BCRYPT);
 
-                    setcookie('token', $token, time()+60*60*24*30, '/', $this->Config->getEnv(), false, true);
-                    setcookie('username', $username, time()+60*60*24*30, '/', $this->Config->getEnv(), false, true);
+                    setcookie('token', $token, time()+60*60*24*30, '/', $this->Config->getEnv(), true, true);
+                    setcookie('username', $username, time()+60*60*24*30, '/', $this->Config->getEnv(), true, true);
 
                     echo $username . $token;
 
@@ -108,8 +108,8 @@ class Login
             $this->Database->deleteToken($_COOKIE['username']);
             unset($_COOKIE['username']);
             unset($_COOKIE['token']);
-            setcookie('token', '', time()-3600, '/', $this->Config->getEnv(), false, true);
-            setcookie('username', '', time()-3600, '/', $this->Config->getEnv(), false, true);
+            setcookie('token', '', time()-3600, '/', $this->Config->getEnv(), true, true);
+            setcookie('username', '', time()-3600, '/', $this->Config->getEnv(), true, true);
             echo '<p>You have been logged out. <a href="../index.php">Return to home</a></p>';
         }
     }
