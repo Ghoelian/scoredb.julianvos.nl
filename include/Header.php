@@ -46,6 +46,6 @@ class Header
             echo "<a href='/login'><button type='button'>Log in</button></a>
                 <a href='/register'><button type='button'>Sign up</button></a>";
         }
-        echo "</div>";
+        echo "</div><br>";
     }
 }

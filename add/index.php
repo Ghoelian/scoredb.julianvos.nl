@@ -11,7 +11,7 @@ $Header = new Header();
 $Login = new Login();
 $Config = new Config();
 
-if ($Login->check($_COOKIE['username'], $_COOKIE['token'])) {
+if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_COOKIE['username'], $_COOKIE['token'])) {
     if (isset($_POST["submit"])) {
         $name = $_POST["name"];
         $artist = $_POST["artist"];
@@ -28,7 +28,7 @@ if ($Login->check($_COOKIE['username'], $_COOKIE['token'])) {
         echo $Database->addScore($name, $artist, $speed, $score, $userId, $fc);
     }
 } else {
-    echo "Please log in first";
+    header('Location: ../login/index.php');
 }
 ?>
 
@@ -80,7 +80,7 @@ if ($Login->check($_COOKIE['username'], $_COOKIE['token'])) {
         <form action="index.php" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td>Name:</td>
+                    <td>Song:</td>
                     <td><input type="text" name="name" id="name"></td>
                 </tr>
                 <tr>

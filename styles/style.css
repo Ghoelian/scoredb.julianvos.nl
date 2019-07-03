@@ -32,7 +32,7 @@ a:hover {
 }
 
 table {
-    width: 100%;
+  width: 100%;
 }
 
 td,
@@ -41,11 +41,16 @@ tr {
   text-align: left;
 }
 
-td, th {
-    padding: 2px;
+td,
+th {
+  padding: 2px;
 }
 
 th {
-    border-collapse: separate;
-    border-bottom: 3px solid rgb(200, 200, 200);
+  border-collapse: separate;
+  border-bottom: 3px solid rgb(200, 200, 200);
+}
+
+.menu {
+  text-align: center;
 }

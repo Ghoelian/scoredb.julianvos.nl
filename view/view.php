@@ -27,11 +27,12 @@ if (!isset($_GET['user'])) {
        <?php
         $Header->echoHeader();
 
-        $id = $_GET['user'];
+        $name = $_GET['user'];
 
-        $images = $Database->getImages($id, $_GET['sort']);
+        $images = $Database->getImages($name, $_GET['sort']);
         
-        echo "<p>Total fc's: " . $images->num_rows . "</p><form action='index.php' method='POST'>
+        echo "<p>Total scores: " . $images->num_rows . "</p><br>
+        <form action='index.php' method='POST'>
         <table>
         <th><a href='view.php?sort=name&user=" . $id . "'>Name</a></th>
         <th><a href='view.php?sort=artist&user=" . $id . "'>Artist</a></th>
@@ -41,46 +42,29 @@ if (!isset($_GET['user'])) {
     
         $i = 0;
     
-        while ($row = $images->fetch_array(MYSQLI_NUM)) {
-            $name = $row[2];
-            $artist = $row[3];
-            $speed = $row[4];
-            $score = $row[5];
-            $fc = $row[7];
-            $image = $row[6];
+        while ($row = $images->fetch_array(MYSQLI_ASSOC)) {
+            $name = $row["name"];
+            $artist = $row["artist"];
+            $speed = $row["speed"];
+            $score = $row["score"];
+            $image = $row["image"];
+            $fc = $row["fc"];
 
-            if ($fc == 0) {
-                if ($i % 2 == 0) {
-                    echo '<tr style="background-color: rgb(50, 50, 50)">
-                    <td> <a href="' . $image . '">' . $name . '</a></td>
-                    <td>' . $artist . '</td>
-                    <td>' . $speed . '</td>
-                    <td class="score">' . $score . '</td>
-                    <td><input type="checkbox" disabled></td></tr>';
-                } else {
-                    echo '<tr style="background-color: rgb(36, 36, 36)">
-                    <td> <a href="' . $image . '">' . $name . '</a></td>
-                    <td>' . $artist . '</td>
-                    <td>' . $speed . '</td>
-                    <td class="score">' . $score . '</td>
-                    <td><input type="checkbox" disabled></td></tr>';
-                }
+            if ($i % 2 == 0) {
+                echo '<tr style="background-color: rgb(50, 50, 50)">';
             } else {
-                if ($i % 2 == 0) {
-                    echo '<tr style="background-color: rgb(50, 50, 50)">
-                    <td> <a href="' . $image . '">' . $name . '</a></td>
-                    <td>' . $artist . '</td>
-                    <td>' . $speed . '</td>
-                    <td class="score">' . $score . '</td>
-                    <td><input type="checkbox" checked disabled></td></tr>';
-                } else {
-                    echo '<tr style="background-color: rgb(36, 36, 36)">
-                    <td> <a href="' . $image . '">' . $name . '</a></td>
-                    <td>' . $artist . '</td>
-                    <td>' . $speed . '</td>
-                    <td class="score">' . $score . '</td>
-                    <td><input type="checkbox" checked disabled></td></tr>';
-                }
+                echo '<tr style="background-color: rgb(36, 36, 36)">';
+            }
+
+            echo '<td> <a href="' . $image . '">' . $name . '</a></td>
+                <td>' . $artist . '</td>
+                <td>' . $speed . '</td>
+                <td class="score">' . $score . '</td>';
+                
+            if ($fc == 0) {
+                echo '<td><input type="checkbox" disabled></td></tr>';
+            } else {
+                echo '<td><input type="checkbox" checked disabled></td></tr>';
             }
             $i++;
         }
