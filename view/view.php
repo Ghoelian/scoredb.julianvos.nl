@@ -34,11 +34,11 @@ if (!isset($_GET['user'])) {
         echo "<p>Total scores: " . $images->num_rows . "</p><br>
         <form action='index.php' method='POST'>
         <table>
-        <th><a href='view.php?sort=name&user=" . $id . "'>Name</a></th>
-        <th><a href='view.php?sort=artist&user=" . $id . "'>Artist</a></th>
-        <th><a href='view.php?sort=speed&user=" . $id . "'>Speed<a></th>
-        <th><a href='view.php?sort=score&user=" . $id . "'>Score</a></th>
-        <th><a href='view.php?sort=fc&user=" . $id . "'>FC?</a></th>";
+        <th><a href='view.php?sort=name&user=" . $name . "'>Name</a></th>
+        <th><a href='view.php?sort=artist&user=" . $name . "'>Artist</a></th>
+        <th><a href='view.php?sort=speed&user=" . $name . "'>Speed<a></th>
+        <th><a href='view.php?sort=score&user=" . $name . "'>Score</a></th>
+        <th><a href='view.php?sort=fc&user=" . $name . "'>FC?</a></th>";
     
         $i = 0;
     
