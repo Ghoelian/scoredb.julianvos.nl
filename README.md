@@ -3,3 +3,7 @@ This code won't work as is. It depends on a database with specific tables and re
 https://scoredb.julianvos.nl
 
 # Just noticed sorting doesn't work on the score viewing page. Fixing soon™. In the meantime you can add the username yourself in the url.
+
+# TODO:
+- Create an API which scans the image with OCR to determine the song's details
+- Also save upload date, and add sorting by date added on the view page
