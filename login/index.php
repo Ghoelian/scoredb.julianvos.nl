@@ -63,7 +63,7 @@ if (isset($_POST['username'], $_POST['password'])) {
     <form action="index.php" method="post">
       <input type="text" name="username" placeholder="Username">
       <input type="password" name="password" placeholder="Password">
-      <input type="submit">
+      <input type="submit" value="Log in">
     </form>
   </div>
 </body>
