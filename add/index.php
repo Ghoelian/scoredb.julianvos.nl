@@ -13,17 +13,7 @@ $Config = new Config();
 
 if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_COOKIE['username'], $_COOKIE['token'])) {
     if (isset($_POST["submit"])) {
-        $name = $_POST["name"];
-        $artist = $_POST["artist"];
-        $speed = $_POST["speed"];
-        $score = $_POST["score"];
         $userId = $Database->getId($_COOKIE['username']);
-
-        if (isset($_POST["fc"])) {
-            $fc = 1;
-        } else {
-            $fc = 0;
-        }
 
         echo $Database->addScore($name, $artist, $speed, $score, $userId, $fc);
     }
@@ -79,26 +69,6 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_C
         <div class="login-form">
         <form action="index.php" method="post" enctype="multipart/form-data">
             <table>
-                <tr>
-                    <td>Song:</td>
-                    <td><input type="text" name="name" id="name"></td>
-                </tr>
-                <tr>
-                    <td>Artist:</td>
-                    <td><input type="text" name="artist" id="artist"></td>
-                </tr>
-                <tr>
-                    <td>Speed:</td>
-                    <td><input type="number" name="speed" id="speed" min="1"></td>
-                </tr>
-                <tr>
-                    <td>Score:</td>
-                    <td><input type="number" name="score" id="score" min="1"></td>
-                </tr>
-                <tr>
-                    <td>FC?</td>
-                    <td><input type="checkbox" name="fc" id="fc" value="yes"></td>
-                </tr>
                 <tr>
                     <td>Image:</td>
                     <td><input type="file" name="image" id="image"></td>

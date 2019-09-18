@@ -1,0 +1,32 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colour: rgb(200, 200, 200);
+    --background-colour: rgb(36, 36, 36)
+  }
+  body {
+    background-color: var(--background-colour);
+  }
+
+  li,
+  a:link,
+  a:visited,
+  a:active,
+  h1,
+  h2,
+  h3,
+  h4,
+  td,
+  tr,
+  th,
+  p {
+    color: var(--colour);
+  }
+
+  a:hover {
+    color: rgb(255, 255, 255);
+  }
+
+  th {
+    border-bottom: 3px solid var(--colour);
+  }
+}

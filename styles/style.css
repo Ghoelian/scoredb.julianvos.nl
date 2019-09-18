@@ -1,56 +1,40 @@
-html {
-  font-family: "Arial", Helvetica, sans-serif;
-}
-
-body {
-  background-color: rgb(36, 36, 36);
-}
-
-li,
-a:link,
-a:visited,
-a:active,
-h1,
-h2,
-h3,
-h4,
-td,
-tr,
-th,
-p {
-  color: rgb(200, 200, 200);
-}
-
-a:hover {
-  color: white;
-}
-
-@media only screen and (max-width: 500px) {
-  li {
-    padding: 10px;
+  :root {
+    color-scheme: light dark;
   }
-}
+  
+  html {
+    font-family: "Arial", Helvetica, sans-serif;
+  }
 
-table {
-  width: 100%;
-}
+  a:hover {
+    color: white;
+  }
 
-td,
-th,
-tr {
-  text-align: left;
-}
+  @media only screen and (max-width: 500px) {
+    li {
+      padding: 10px;
+    }
+  }
 
-td,
-th {
-  padding: 2px;
-}
+  table {
+    width: 100%;
+  }
 
-th {
-  border-collapse: separate;
-  border-bottom: 3px solid rgb(200, 200, 200);
-}
+  td,
+  th,
+  tr {
+    text-align: left;
+  }
 
-.menu {
-  text-align: center;
-}
+  td,
+  th {
+    padding: 2px;
+  }
+
+  th {
+    border-collapse: separate;
+  }
+
+  .menu {
+    text-align: center;
+  }

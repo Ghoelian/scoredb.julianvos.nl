@@ -1,0 +1,28 @@
+@media (prefers-color-scheme: light) {
+   body {
+    background-color: rgb(255, 255, 255);
+  }
+
+  li,
+  a:link,
+  a:visited,
+  a:active,
+  h1,
+  h2,
+  h3,
+  h4,
+  td,
+  tr,
+  th,
+  p {
+    color: rgb(0, 0, 0);
+  }
+
+  a:hover {
+    color: rgb(53, 53, 53);
+  }
+
+  th {
+    border-bottom: 3px solid rgb(0, 0, 0);
+  }
+}
