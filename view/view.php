@@ -17,59 +17,77 @@ if (!isset($_GET['user'])) {
 ?>
 
 <html>
-    <head>
-        <title>View scores</title>
-        <?php
-        $Head->echoHead();
-        ?> 
-    </head>
-    <body>
-       <?php
-        $Header->echoHeader();
 
-        $name = $_GET['user'];
+<head>
+    <title>View scores</title>
+    <?php
+    $Head->echoHead();
+    ?>
+</head>
 
-        $images = $Database->getImages($name, $_GET['sort']);
-        
-        echo "<p>Total scores: " . $images->num_rows . "</p><br>
+<body>
+    <?php
+    $Header->echoHeader();
+
+    $name = $_GET['user'];
+
+    $images = $Database->getImages($name, $_GET['sort']);
+
+    echo "<p>Total scores: " . $images->num_rows . "</p><br>
         <form action='index.php' method='POST'>
         <table>
         <th><a href='view.php?sort=name&user=" . $name . "'>Name</a></th>
         <th><a href='view.php?sort=artist&user=" . $name . "'>Artist</a></th>
+        <th><a href='view.php?sort=charter&user=" . $name . "'>Charter</a></th>
         <th><a href='view.php?sort=speed&user=" . $name . "'>Speed<a></th>
         <th><a href='view.php?sort=score&user=" . $name . "'>Score</a></th>
+        <th><a href='view.php?sort=stars&user=" . $name . "'>Stars</a></th>
+        <th><a href='view.php?sort=accuracy&user=" . $name . "'>Accuracy</a></th>
+        <th><a href='view.php?sort=longest_streak&user=" . $name . "'>Longest streak</a></th>
+        <th><a href='view.php?sort=sp_phrases&user=" . $name . "'>SP Phrases</a></th>
         <th><a href='view.php?sort=fc&user=" . $name . "'>FC?</a></th>";
-    
-        $i = 0;
-    
-        while ($row = $images->fetch_array(MYSQLI_ASSOC)) {
-            $name = $row["name"];
-            $artist = $row["artist"];
-            $speed = $row["speed"];
-            $score = $row["score"];
-            $image = $row["image"];
-            $fc = $row["fc"];
 
-            if ($i % 2 == 0) {
-                echo '<tr style="background-color: rgb(50, 50, 50)">';
-            } else {
-                echo '<tr style="background-color: rgb(36, 36, 36)">';
-            }
+    $i = 0;
 
-            echo '<td> <a href="' . $image . '">' . $name . '</a></td>
-                <td>' . $artist . '</td>
-                <td>' . $speed . '</td>
-                <td class="score">' . $score . '</td>';
-                
-            if ($fc == 0) {
-                echo '<td><input type="checkbox" disabled></td></tr>';
-            } else {
-                echo '<td><input type="checkbox" checked disabled></td></tr>';
-            }
-            $i++;
+    while ($row = $images->fetch_array(MYSQLI_ASSOC)) {
+        $name = $row["name"];
+        $artist = $row["artist"];
+        $speed = $row["speed"];
+        $score = $row["score"];
+        $image = $row["image"];
+        $fc = $row["fc"];
+        $charter = $row["charter"];
+        $stars = $row["stars"];
+        $accuracy = $row["accuracy"];
+        $longest_streak = $row["longest_streak"];
+        $sp_phrases = $row["sp_phrases"];
+
+        if ($i % 2 == 0) {
+            echo '<tr style="background-color: rgb(50, 50, 50)">';
+        } else {
+            echo '<tr style="background-color: rgb(36, 36, 36)">';
         }
-        
-        $con->close();
-        ?>
-    </body>
+
+        echo '<td> <a href="' . $image . '">' . $name . '</a></td>
+                <td>' . $artist . '</td>
+                <td>' . $charter . '</td>
+                <td>' . $speed . '</td>
+                <td class="score">' . $score . '</td>
+                <td>' . $stars . '</td>
+                <td>' . $accuracy . '</td>
+                <td>' . $longest_streak . '</td>
+                <td>' . $sp_phrases . '</td>';
+
+        if ($fc == 0) {
+            echo '<td><input type="checkbox" disabled></td></tr>';
+        } else {
+            echo '<td><input type="checkbox" checked disabled></td></tr>';
+        }
+        $i++;
+    }
+
+    $con->close();
+    ?>
+</body>
+
 </html>

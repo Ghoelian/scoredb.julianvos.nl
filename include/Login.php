@@ -39,10 +39,8 @@ class Login
                     $token = uniqid('', true);
                     $hashToken = password_hash($token, PASSWORD_BCRYPT);
 
-                    setcookie('token', $token, time()+60*60*24*30, '/', $this->Config->getEnv(), true, true);
-                    setcookie('username', $username, time()+60*60*24*30, '/', $this->Config->getEnv(), true, true);
-
-                    echo $username . $token;
+                    setcookie('token', $token, time()+60*60*24*30, '/', $this->Config->getEnv(), false, true);
+                    setcookie('username', $username, time()+60*60*24*30, '/', $this->Config->getEnv(), false, true);
 
                     if ($this->Database->putToken($hashToken, $username)) {
                         header('location: /index.php');
