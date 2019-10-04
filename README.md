@@ -5,5 +5,9 @@ This code won't work as is. It depends on a database with specific tables and re
 <br>
 
 # TODO:
-- Create an API which scans the image with OCR to determine the song's details
 - Also save upload date, and add sorting by date added on the view page
+- Create landing page to confirm score upload
+- Fix image viewing
+
+# DONE:
+- Create an API which scans the image with OCR to determine the song's details
