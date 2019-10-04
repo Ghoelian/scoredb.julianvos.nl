@@ -14,8 +14,6 @@ $Config = new Config();
 if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_COOKIE['username'], $_COOKIE['token'])) {
 	if (isset($_POST['submit'])) {
 		echo $Database->addScore($Database->getId($_COOKIE['username']));
-	} else {
-		echo 'wut';
 	}
 } else {
 	header('Location: ../login/index.php');
