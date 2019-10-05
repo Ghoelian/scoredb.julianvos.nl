@@ -33,7 +33,8 @@ if (!isset($_GET['user'])) {
 
     $images = $Database->getImages($name, $_GET['sort']);
 
-    echo "<p>Total scores: " . $images->num_rows . "</p><br>
+    echo "<p>Total scores: " . $images->num_rows . "<br>
+            Total FC's: " . $fcs . " <br></p>
         <form action='index.php' method='POST'>
         <table>
         <th><a href='view.php?sort=name&user=" . $name . "'>Name</a></th>
@@ -50,6 +51,10 @@ if (!isset($_GET['user'])) {
     $i = 0;
 
     while ($row = $images->fetch_array(MYSQLI_ASSOC)) {
+        if ($row["fc"] === true) {
+          $fcs++;  
+        }
+
         $name = $row["name"];
         $artist = $row["artist"];
         $speed = $row["speed"];
