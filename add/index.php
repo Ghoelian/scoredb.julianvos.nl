@@ -61,6 +61,10 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_C
 			font-weight: bold;
 			color: #ffffff;
 		}
+		
+		.warning {
+			color: rgb(255, 0, 0);	
+		}
 	</style>
 </head>
 
@@ -68,6 +72,11 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_C
 	<?php
 	$Header->echoHeader();
 	?>
+	<div class="warning">PLEASE NOTE:<br/>
+		This website only works for screenshots made in-game from Clone Hero v0.22.1 (I think, or whatever update introduced in-game screenshots).<br/>
+		Also, there was a bug in all versions before v0.23.1 where sometimes the script that reads the scores doesn't read the accuracy, highest streak and SP Phrases correctly.<br/>
+		For the best results, I'd highly recommend updating to v0.23.1 and only uploading screenshots for that version.
+	</div>
 
 	<div class="login-form">
 		<form action="index.php" method="post" enctype="multipart/form-data">
