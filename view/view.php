@@ -37,7 +37,7 @@ if (!isset($_GET['user'])) {
     $images = $Database->getImages($name, $_GET['sort']);
 
     echo "<p>Total scores: " . $images->num_rows . "<br>
-            <div id='fc'>Total FC's: " . $fcs . "</div></p><br>
+            <div id='fcs'>Total FC's: 0</div></p><br>
         <form action='index.php' method='POST'>
         <table>
         <th><a href='view.php?sort=name&user=" . $name . "'>Name</a></th>
