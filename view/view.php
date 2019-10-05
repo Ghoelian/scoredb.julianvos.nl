@@ -17,6 +17,9 @@ if (!isset($_GET['user'])) {
 ?>
 
 <html>
+    <script>
+        let fcs = 0
+    </script>
 
 <head>
     <title>View scores</title>
@@ -34,7 +37,7 @@ if (!isset($_GET['user'])) {
     $images = $Database->getImages($name, $_GET['sort']);
 
     echo "<p>Total scores: " . $images->num_rows . "<br>
-            Total FC's: " . $fcs . " <br></p>
+            <div id='fc'>Total FC's: " . $fcs . "</div></p><br>
         <form action='index.php' method='POST'>
         <table>
         <th><a href='view.php?sort=name&user=" . $name . "'>Name</a></th>
@@ -51,9 +54,13 @@ if (!isset($_GET['user'])) {
     $i = 0;
 
     while ($row = $images->fetch_array(MYSQLI_ASSOC)) {
-        if ($row["fc"] === true) {
-          $fcs++;  
-        }
+        if ($row["fc"] == 1) {
+         ?>
+            <script>
+                fcs++
+         </script>
+    <?php    
+    }
 
         $name = $row["name"];
         $artist = $row["artist"];
@@ -90,7 +97,13 @@ if (!isset($_GET['user'])) {
         }
         $i++;
     }
+    
+    ?>
+    <script>
+        Document.getElementById('fcs').innerHTML("Total FC's: " + fcs)
+    </script>
 
+    <?php
     $con->close();
     ?>
 </body>
