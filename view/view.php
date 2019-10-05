@@ -100,7 +100,7 @@ if (!isset($_GET['user'])) {
     
     ?>
     <script>
-        Document.getElementById('fcs').innerHTML("Total FC's: " + fcs)
+        document.getElementById('fcs').innerHTML = "Total FC's: " + fcs
     </script>
 
     <?php
