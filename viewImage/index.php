@@ -26,7 +26,7 @@ if (!isset($_GET['image'])) {
 	$Header->echoHeader();
 	?>
 
-	<img width='100%' src=' <?php
+	<img width='75%' src=' <?php
 	echo $_GET['image']
 	?>'>
 </body>
