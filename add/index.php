@@ -13,7 +13,12 @@ $Config = new Config();
 
 if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_COOKIE['username'], $_COOKIE['token'])) {
 	if (isset($_POST['submit'])) {
-		echo $Database->addScore($Database->getId($_COOKIE['username']));
+		$a = $Database->addScore($Database->getId($_COOKIE['username']));
+		if(!$a) {
+			header('Location: /add/success.php');
+		} else {
+			echo $a;
+		}
 	}
 } else {
 	header('Location: ../login/index.php');
@@ -79,9 +84,8 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['token']) && $Login->check($_C
 		This website only works for screenshots made in-game from Clone Hero v0.22.1 (I think, or whatever update introduced in-game screenshots).<br/>
 		Also, there was a bug in all versions before v0.23.1 where sometimes the script that reads the scores doesn't read the accuracy, highest streak and SP Phrases correctly.<br/>
 		For the best results, I'd highly recommend updating to v0.23.1 and only uploading screenshots for that version.
-		<br/>
-		⠀
 	</div>
+	<br/>
 
 	<div class="login-form">
 		<form action="index.php" method="post" enctype="multipart/form-data">
