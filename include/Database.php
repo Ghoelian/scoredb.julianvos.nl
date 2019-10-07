@@ -143,7 +143,8 @@ class Database
 	public function addScore($userId)
 	{
 		$target_dir = __DIR__ . '/../tmp/';
-		$target_file = $target_dir . uniqid() . '.png';
+		$filename = uniqid() . '.png';
+		$target_file = $target_dir . $filename;
 		$uploadOk = 1;
 		$imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
 
@@ -232,7 +233,8 @@ class Database
 		$imageFileType = $path_parts['extension'];
 
 		$target_dir_new = __DIR__ . "/../images/" . $userId . '/';
-		$target_file_new = $target_dir_new . md5(uniqid()) . ".png";
+		$filename_new = md5(uniqid()) . '.png';
+		$target_file_new = $target_dir_new . $filename_new;
 
 		if (!file_exists($target_dir)) {
 			mkdir($target_dir, 0777, true);
@@ -246,10 +248,10 @@ class Database
 		                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 					if ($stmt = $this->con->prepare($sql)) {
-						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, $target_file_new, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
+						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, $filename_new, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
 							if ($stmt->execute()) {
 								$stmt->close();
-								return "<h2>Score inserted!</h2>";
+								return false;
 							} else {
 								return $stmt->error;
 								return "<h2>Executing statement failed. Please try again later!</h2>";
