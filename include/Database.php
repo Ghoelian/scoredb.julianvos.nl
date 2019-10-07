@@ -248,7 +248,7 @@ class Database
 		                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 					if ($stmt = $this->con->prepare($sql)) {
-						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, $filename_new, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
+						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, '/images/' . $userId . '/' . $filename_new, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
 							if ($stmt->execute()) {
 								$stmt->close();
 								return false;
