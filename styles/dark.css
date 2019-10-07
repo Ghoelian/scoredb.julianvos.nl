@@ -6,9 +6,6 @@
   a:link,
   a:visited,
   a:active,
-  input:active,
-  input:link,
-  input:visited,
   h1,
   h2,
   h3,
@@ -25,8 +22,7 @@
     
   }
 
-  a:hover,
-  input:hover {
+  a:hover {
     background-color: #3c4249;
   }
 

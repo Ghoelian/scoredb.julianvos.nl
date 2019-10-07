@@ -38,13 +38,11 @@ $Database = new Database();
             }
 
             echo 
-            "<td><a href='view.php?user=" . $username . "'>" . $username . "</a></td>
+            "<td><a href='view.php?sort=artist&user=" . $username . "'>" . $username . "</a></td>
             </tr>";
             
             $i++;
         }
-        
-        $con->close();
         ?>
     </body>
 </html>

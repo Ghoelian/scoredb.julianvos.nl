@@ -12,7 +12,7 @@ $Login = new Login();
 $Config = new Config();
 
 if (!isset($_GET['user'])) {
-    header("location: /view");
+    header("Location: /view");
 }
 ?>
 
@@ -80,7 +80,7 @@ if (!isset($_GET['user'])) {
             echo '<tr style="background-color: rgb(36, 36, 36)">';
         }
 
-        echo '<td> <a href="' . $image . '">' . $name . '</a></td>
+        echo '<td> <a href="/viewImage/?image=' . $image . '">' . $name . '</a></td>
                 <td>' . $artist . '</td>
                 <td>' . $charter . '</td>
                 <td>' . $speed . '</td>
@@ -102,10 +102,6 @@ if (!isset($_GET['user'])) {
     <script>
         document.getElementById('fcs').innerHTML = "Total FC's: " + fcs
     </script>
-
-    <?php
-    $con->close();
-    ?>
 </body>
 
 </html>
