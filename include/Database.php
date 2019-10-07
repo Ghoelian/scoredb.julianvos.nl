@@ -167,7 +167,7 @@ class Database
 			$result = 'The file already exists.';
 		}
 
-		if ($_FILES['images']['size'] > 500000) {
+		if ($_FILES['image']['size'] > 2000000) {
 			$uploadOk = 0;
 			$result = 'Your file is too big.';
 		}
@@ -248,7 +248,9 @@ class Database
 		                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 					if ($stmt = $this->con->prepare($sql)) {
-						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, '/images/' . $userId . '/' . $filename_new, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
+						$temp_image = '/images/' . $userId . '/' . $filename_new;
+
+						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, $temp_image, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
 							if ($stmt->execute()) {
 								$stmt->close();
 								return false;
