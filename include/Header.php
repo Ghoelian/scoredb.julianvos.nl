@@ -10,41 +10,48 @@ class Header
 
     public function echoHeader()
     {
-        echo "<div class='header' style='width: 100%; height: 5%; background-color: rgb(50, 50, 50)'>
-            <style>
-            button {
+        echo "<style> 
+        .header {
             width: 19%;
-            padding: 15px;
+            height: 99%;
             background-color: #535b63;
-            border: 0;
-            box-sizing: border-box;
-            cursor: pointer;
+            text-align: center;
             font-weight: bold;
             color: #ffffff;
-            }
-            </style>";
+          }
+        
+          .container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: stretch;
+          }
+        </style>";
+
+        echo "<div class='container' style='width: 100%; height: 5%; background-color: rgb(50, 50, 50)'>";
 
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
             if ($this->Login->check($_COOKIE['username'], $_COOKIE['token'])) {
-                echo "<button type='button' disabled>Logged in as ";
+                echo "<a class='header' >Logged in as ";
                 echo $_COOKIE['username'];
-                echo "</button>";
+                echo "</a>";
             }
         }
-        echo "<a href='/index.php'><button type='button'>Home</button></a>
-            <a href='/add'><button type='button'>Add</button></a>
-            <!--<button type='button'>Edit</button>-->
-            <a href='/view'><button type='button'>View</button></a>";
+        echo "<a class='header' href='/index.php'>Home</a>
+            <a class='header' href='/add'>Add</a>
+            <a class='header' href='/view'>View</a>";
         if (isset($_COOKIE['token']) && isset($_COOKIE['username'])) {
             if ($this->Login->check($_COOKIE['username'], $_COOKIE['token'])) {
-                echo "<a href='/login/logout.php'><button type='button'>Log out</button></a>";
+                echo "<a class='header' href='/login/logout.php'>Log out</a>";
             } else {
-                echo "<a href='/login'><button type='button'>Log in</button></a>
-                    <a href='/register'><button type='button'>Sign up</button></a>";
+                echo "<a class='header' href='/login'>Log in</a>
+                    <a class='header' href='/register'>Sign up</a>";
             }
         } else {
-            echo "<a href='/login'><button type='button'>Log in</button></a>
-                <a href='/register'><button type='button'>Sign up</button></a>";
+            echo "<a class='header' href='/login'>Log in</a>
+                <a class='header' href='/register'>Sign up</a>";
         }
         echo "</div><br>";
     }

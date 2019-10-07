@@ -19,6 +19,11 @@
 
   a:hover {
     color: rgb(255, 255, 255);
+    
+  }
+
+  a.header:hover {
+    background-color: #3c4249;
   }
 
   th {
