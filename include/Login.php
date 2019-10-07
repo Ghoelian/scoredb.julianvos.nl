@@ -108,7 +108,7 @@ class Login
             unset($_COOKIE['token']);
             setcookie('token', '', time()-3600, '/', $this->Config->getEnv(), $this->Config->getSecure(), true);
             setcookie('username', '', time()-3600, '/', $this->Config->getEnv(), $this->Config->getSecure(), true);
-            echo '<p>You have been logged out. <a href="../index.php">Return to homepage</a></p>';
+            header('Location: /login/index.php');
         }
     }
 }
