@@ -226,7 +226,11 @@ class Database
 		$accuracy = $response['Accuracy'];
 		$longest_streak = $response['Longest streak'];
 		$sp_phrases = $response['SP Phrases'];
-		$fc = $response['FC'];
+		if ($response['FC'] == 'True') {
+			$fc = 1;
+		} else {
+			$fc = 0;
+		}
 		// return var_dump($response);
 
 		$path_parts = pathinfo($_FILES["image"]["name"]);
@@ -249,6 +253,11 @@ class Database
 
 					if ($stmt = $this->con->prepare($sql)) {
 						$temp_image = '/images/' . $userId . '/' . $filename_new;
+						$temp_fc = false;
+						
+						if ($fc == 'True') {
+							$temp_fc = true;
+						}
 
 						if ($stmt->bind_param("issiiissssis", $userId, $name, $artist, $speed, $score, $fc, $temp_image, $charter, $stars, $accuracy, $longest_streak, $sp_phrases)) {
 							if ($stmt->execute()) {
